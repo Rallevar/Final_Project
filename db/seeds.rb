@@ -68,3 +68,4 @@ CSV.foreach(csv_path, headers: true) do |row|
 end
 
 puts "Seeded " + Category.count.to_s + " categories and " + Product.count.to_s + " products."
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
