@@ -5,7 +5,7 @@ OrderItem.destroy_all
 Order.destroy_all
 Product.destroy_all
 Category.destroy_all
-User.destroy_all
+Customer.destroy_all
 
 csv_path = Rails.root.join('db', 'cheese_details.csv')
 
