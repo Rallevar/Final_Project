@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "about/index"
   resources :orders, only: [:index, :show]
   resources :users, only: [:index, :show]
   resources :products, only: [:index, :show]
