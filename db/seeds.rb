@@ -22,7 +22,7 @@ CSV.foreach(csv_path, headers: true) do |row|
 
   # Pull the product name from the end of the URL
   url_parts = row['url'].split('/')
-  product_name = url_parts[url_parts.length - 2]
+  product_name = url_parts[url_parts.length - 1]
 
   # Skip if we couldn't get a name
   if product_name == nil || product_name == ""
@@ -67,4 +67,4 @@ CSV.foreach(csv_path, headers: true) do |row|
   end
 end
 
-puts "Seeded " + Category.count + " categories and " + Product.count + " products."
+puts "Seeded " + Category.count.to_s + " categories and " + Product.count.to_s + " products."
