@@ -7,14 +7,11 @@
 =end
 
 Rails.application.routes.draw do
-  get "categories/index"
-  get "categories/show"
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :customers
   ActiveAdmin.routes(self)
   get "about", to: "about#show"
   resources :orders, only: [:index, :show]
-  resources :customers, only: [:index, :show]
   resources :products, only: [:index, :show]
   resources :categories, only: [:index, :show]
 
