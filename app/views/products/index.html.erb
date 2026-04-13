@@ -9,40 +9,5 @@
 <h1>Products</h1>
 
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
-	<% @products.each do |product| %>
-		<div class="col">
-			<div class="card h-100">
-				<% if product.image.attached? %>
-					<%= image_tag product.image, class: "card-img-top", alt: product.product_name, style: "height: 220px; object-fit: cover;" %>
-				<% else %>
-					<div class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted" style="height: 220px;">
-						No image available
-					</div>
-				<% end %>
-
-				<div class="card-body d-flex flex-column">
-					<div class="d-flex justify-content-between align-items-start mb-2">
-						<h5 class="card-title mb-0"><%= product.product_name.to_s.tr("-", " ").titleize %></h5>
-						<% if product.stock_quantity.to_i == 0 %>
-							<span class="badge text-bg-danger">Out of Stock</span>
-						<% end %>
-					</div>
-					<p class="card-text mb-1"><span class="fw-bold">Price:</span> <%= number_to_currency(product.cost) %></p>
-
-					<p class="card-text mb-1">
-						<span class="fw-bold">Category:</span>
-						<%= product.category.name %>
-					</p>
-
-					<p class="card-text mb-1"><span class="fw-bold">Stock:</span> <%= product.stock_quantity %></p>
-					<p class="card-text mb-2"><span class="fw-bold">Origin:</span> <%= product.origin_country %></p>
-					<p class="card-text"><%= truncate(product.description.to_s, length: 250) %></p>
-
-					<div class="mt-auto">
-						<%= link_to "View Product", product_path(product), class: "btn btn-outline-primary btn-sm" %>
-					</div>
-				</div>
-			</div>
-		</div>
-	<% end %>
+  <%= render partial: "product_card", collection: @products, as: :product %>
 </div>
