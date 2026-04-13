@@ -1,3 +1,11 @@
+=begin
+  Name: Nathan Keenan
+  Program: Business Information Technology
+  Course: WEBD-3011 (277098)
+  Created: 2026-04-10
+  Updated: 2026-04-13
+=end
+
 ActiveAdmin.register Product do
 
   permit_params :product_name, :cost, :stock_quantity, :weight, :origin_country, :description, :category_id, :image

@@ -1,3 +1,11 @@
+=begin
+  Name: Nathan Keenan
+  Program: Business Information Technology
+  Course: WEBD-3011 (277098)
+  Created: 2026-04-10
+  Updated: 2026-04-13
+=end
+
 class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
