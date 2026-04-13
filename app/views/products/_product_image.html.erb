@@ -1,0 +1,15 @@
+ <!--begin
+  Name: Nathan Keenan
+  Program: Business Information Technology
+  Course: WEBD-3011 (277098)
+  Created: 2026-04-13
+  Updated: 2026-04-13
+ -->
+
+<% if product.image.attached? %>
+    <%= image_tag product.image, class: "w-100 h-100 object-fit-cover", alt: product.product_name %>
+<% else %>
+    <div class="w-100 h-100 d-flex align-items-center justify-content-center bg-light text-muted">
+    No image available
+  </div>
+<% end %>
