@@ -1,14 +1,18 @@
 require 'csv'
 
-# Clear all tables before seeding
+puts "Seeding database..."
+puts "Clearing existing data..."
 OrderItem.destroy_all
 Order.destroy_all
 Product.destroy_all
 Category.destroy_all
 Customer.destroy_all
+AboutPage.destroy_all
 
+puts "Reading data from CSV..."
 csv_path = Rails.root.join('db', 'cheese_details.csv')
 
+puts "Creating categories and products..."
 CSV.foreach(csv_path, headers: true) do |row|
   family = row['family']
 
@@ -68,4 +72,23 @@ CSV.foreach(csv_path, headers: true) do |row|
 end
 
 puts "Seeded " + Category.count.to_s + " categories and " + Product.count.to_s + " products."
+
+puts "Creating admin user..."
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+
+
+
+# Create a default About page record if one does not exist yet.
+about_page = AboutPage.first
+
+if about_page == nil
+  AboutPage.create!(
+    title: "About Us",
+    content: "Welcome to Winnipeg Cheesemongers. You can edit this content in your Active Admin dashboard.",
+    telephone: "204-555-1234",
+    address: "123 Cheese Lane, Winnipeg, MB",
+    email: "info@winnipegcheesemongers.com"
+  )
+end
+
+puts "Database seeding complete."
