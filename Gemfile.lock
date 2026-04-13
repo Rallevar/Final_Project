@@ -381,6 +381,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  bcrypt (~> 3.1.7)
   bootsnap
   bootstrap (~> 5.3.0)
   brakeman

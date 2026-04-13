@@ -18,6 +18,29 @@
   </head>
 
   <body>
+    <nav>
+      <%= link_to "Home", root_path %> |
+      <%= link_to "Products", products_path %> |
+      <%= link_to "About", about_path %>
+
+      <% if customer_signed_in? %>
+        | <%= link_to "Orders", orders_path %>
+        | <%= link_to "My Account", edit_customer_registration_path %>
+        | <%= button_to "Logout", destroy_customer_session_path, method: :delete %>
+      <% else %>
+        | <%= link_to "Sign Up", new_customer_registration_path %>
+        | <%= link_to "Login", new_customer_session_path %>
+      <% end %>
+    </nav>
+
+    <% if notice %>
+      <p><%= notice %></p>
+    <% end %>
+
+    <% if alert %>
+      <p><%= alert %></p>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

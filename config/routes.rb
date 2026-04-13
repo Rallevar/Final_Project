@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
+  devise_for :customers
   ActiveAdmin.routes(self)
   get "about", to: "about#show"
   resources :orders, only: [:index, :show]
