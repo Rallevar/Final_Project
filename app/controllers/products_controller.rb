@@ -14,5 +14,6 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @product = Product.includes(:category, image_attachment: :blob).find(params[:id])
   end
 end

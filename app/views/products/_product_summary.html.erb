@@ -1,0 +1,16 @@
+ <!--begin
+  Name: Nathan Keenan
+  Program: Business Information Technology
+  Course: WEBD-3011 (277098)
+  Created: 2026-04-13
+  Updated: 2026-04-13
+ -->
+
+<p class="mb-2"><span class="fw-bold">Price:</span> <%= number_to_currency(product.cost) %></p>
+<p class="mb-2"><span class="fw-bold">Category:</span> <%= link_to product.category.name, category_path(product.category) %></p>
+<p class="mb-2"><span class="fw-bold">Stock Quantity:</span> <%= product.stock_quantity %></p>
+<p class="mb-2"><span class="fw-bold">Origin Country:</span> <%= product.origin_country %></p>
+
+<% if product.stock_quantity.to_i == 0 %>
+  <p><span class="badge text-bg-danger">Out of Stock</span></p>
+<% end %>
