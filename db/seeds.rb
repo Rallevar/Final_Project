@@ -33,35 +33,46 @@ CSV.foreach(csv_path, headers: true) do |row|
     next
   end
 
-  # Build description by adding fields only if they have a real value
-  description_parts = []
+  # Build a readable name and sentence-style description.
+  display_name = product_name.tr('-', ' ').titleize
 
-  if row['type'] != nil && row['type'] != "NA"
-    description_parts << row['type']
+  cheese_type = row['type']
+  if cheese_type == nil || cheese_type == "NA" || cheese_type == ""
+    cheese_type = "traditional"
   end
 
-  if row['flavor'] != nil && row['flavor'] != "NA"
-    description_parts << row['flavor']
+  flavor = row['flavor']
+  if flavor == nil || flavor == "NA" || flavor == ""
+    flavor = "balanced flavor profile"
   end
 
-  if row['aroma'] != nil && row['aroma'] != "NA"
-    description_parts << row['aroma']
+  aroma = row['aroma']
+  if aroma == nil || aroma == "NA" || aroma == ""
+    aroma = "mild"
   end
 
-  if row['texture'] != nil && row['texture'] != "NA"
-    description_parts << row['texture']
+  texture = row['texture']
+  if texture == nil || texture == "NA" || texture == ""
+    texture = "smooth"
   end
-
-  description = description_parts.join(' | ')
 
   # Set origin_country to nil if not listed
   origin_country = row['country']
-  if origin_country == "NA"
+  if origin_country == nil || origin_country == "NA" || origin_country == ""
     origin_country = nil
   end
 
+  origin_text = origin_country
+  if origin_text == nil
+    origin_text = "an unknown region"
+  end
+
+  description = display_name + " is a " + cheese_type + " cheese hailing from " + origin_text + ". " +
+                display_name + " boasts a " + flavor + " flavor profile and a " + aroma + " aroma. " +
+                display_name + " is most known to be a " + texture + " cheese."
+
   # Create the product if it doesn't already exist
-  product = Product.find_or_create_by!(product_name: product_name) do |p|
+  Product.find_or_create_by!(product_name: product_name) do |p|
     p.cost = 0
     p.stock_quantity = 0
     p.weight = 0
