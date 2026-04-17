@@ -6,7 +6,20 @@
   Updated: 2026-04-13
  -->
 
-<h1>Products</h1>
+<h1>
+  <% if action_name == "recent" %>
+    Recent Products
+  <% elsif action_name == "newest" %>
+    Newest Products
+  <% else %>
+    Products
+  <% end %>
+</h1>
+
+<p>
+  <%= link_to "View New Products", newest_products_path, class: "btn btn-outline-primary mb-3" %>
+  <%= link_to "View Recent Products", recent_products_path, class: "btn btn-outline-primary mb-3" %>
+</p>
 
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
   <%= render partial: "product_card", collection: @products, as: :product %>
