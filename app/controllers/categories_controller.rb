@@ -12,11 +12,15 @@ class CategoriesController < ApplicationController
                           .select("categories.*, COUNT(products.id) AS products_count")
                           .group("categories.id")
                           .order(:name)
+                          .page(params[:page])
+                          .per(15)
   end
 
   def show
     @category = Category.find(params[:id])
     @products = @category.products.includes(:category, image_attachment: :blob)
                          .order(product_name: :asc)
+                         .page(params[:page])
+                         .per(15)
   end
 end

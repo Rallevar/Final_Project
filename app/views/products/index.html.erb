@@ -21,6 +21,30 @@
   <%= link_to "View Recent Products", recent_products_path, class: "btn btn-outline-primary mb-3" %>
 </p>
 
+<%= form_with url: products_path, method: :get, local: true, class: "row g-3 mb-4" do %>
+  <div class="col-md-4">
+    <%= label_tag :keyword, "Search Products" %>
+    <%= text_field_tag :keyword, params[:keyword], class: "form-control" %>
+  </div>
+
+  <div class="col-md-4">
+    <%= label_tag :category_id, "Filter by Category" %>
+    <%= select_tag :category_id,
+          options_from_collection_for_select(@categories, :id, :name, params[:category_id]),
+          include_blank: "All Categories",
+          class: "form-select" %>
+  </div>
+
+  <div class="col-md-4 d-flex align-items-end">
+    <%= submit_tag "Search", class: "btn btn-primary w-100" %>
+  </div>
+<% end %>
+
+
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
   <%= render partial: "product_card", collection: @products, as: :product %>
+</div>
+
+<div>
+  <%= paginate @products %>
 </div>

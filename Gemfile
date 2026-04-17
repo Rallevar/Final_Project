@@ -70,3 +70,4 @@ gem "kaminari"
 
 gem "bootstrap", "~> 5.3.0"
 gem "sassc-rails"
+gem "kaminari-bootstrap", "~> 3.0"
