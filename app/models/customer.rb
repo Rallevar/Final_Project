@@ -13,15 +13,16 @@ class Customer < ApplicationRecord
          :rememberable,
          :validatable
 
+  belongs_to :province, optional: true
   has_many :orders
 
   validates :user_name, presence: true
 
   def self.ransackable_attributes(auth_object = nil)
-    ["id", "user_name", "email", "name", "telephone", "address", "created_at", "updated_at"]
+    ["id", "user_name", "email", "name", "telephone", "address", "province_id", "created_at", "updated_at"]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["orders"]
+    ["orders", "province"]
   end
 end

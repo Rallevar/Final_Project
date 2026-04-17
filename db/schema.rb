@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_04_13_123000) do
+ActiveRecord::Schema[7.2].define(version: 2026_04_17_121000) do
   create_table "about_pages", force: :cascade do |t|
     t.string "title", null: false
     t.text "content", null: false
@@ -93,7 +93,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_04_13_123000) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "province_id"
     t.index ["email"], name: "index_customers_on_email", unique: true
+    t.index ["province_id"], name: "index_customers_on_province_id"
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
@@ -115,6 +117,15 @@ ActiveRecord::Schema[7.2].define(version: 2026_04_13_123000) do
     t.decimal "total_cost", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "shipping_address"
+    t.string "province_name"
+    t.decimal "subtotal", precision: 10, scale: 2
+    t.decimal "gst_rate", precision: 6, scale: 5
+    t.decimal "pst_rate", precision: 6, scale: 5
+    t.decimal "hst_rate", precision: 6, scale: 5
+    t.decimal "gst_amount", precision: 10, scale: 2
+    t.decimal "pst_amount", precision: 10, scale: 2
+    t.decimal "hst_amount", precision: 10, scale: 2
     t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
@@ -131,8 +142,21 @@ ActiveRecord::Schema[7.2].define(version: 2026_04_13_123000) do
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
+  create_table "provinces", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "code", null: false
+    t.decimal "gst_rate", precision: 6, scale: 5, default: "0.0", null: false
+    t.decimal "pst_rate", precision: 6, scale: 5, default: "0.0", null: false
+    t.decimal "hst_rate", precision: 6, scale: 5, default: "0.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_provinces_on_code", unique: true
+    t.index ["name"], name: "index_provinces_on_name", unique: true
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "customers", "provinces"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "customers"

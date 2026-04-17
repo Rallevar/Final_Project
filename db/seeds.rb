@@ -16,7 +16,29 @@ Order.destroy_all
 Product.destroy_all
 Category.destroy_all
 Customer.destroy_all
+Province.destroy_all
 AboutPage.destroy_all
+
+puts "Creating provinces..."
+provinces = [
+  { name: "Alberta", code: "AB", gst_rate: 0.05, pst_rate: 0.0, hst_rate: 0.0 },
+  { name: "British Columbia", code: "BC", gst_rate: 0.05, pst_rate: 0.07, hst_rate: 0.0 },
+  { name: "Manitoba", code: "MB", gst_rate: 0.05, pst_rate: 0.07, hst_rate: 0.0 },
+  { name: "New Brunswick", code: "NB", gst_rate: 0.0, pst_rate: 0.0, hst_rate: 0.15 },
+  { name: "Newfoundland and Labrador", code: "NL", gst_rate: 0.0, pst_rate: 0.0, hst_rate: 0.15 },
+  { name: "Northwest Territories", code: "NT", gst_rate: 0.05, pst_rate: 0.0, hst_rate: 0.0 },
+  { name: "Nova Scotia", code: "NS", gst_rate: 0.0, pst_rate: 0.0, hst_rate: 0.15 },
+  { name: "Nunavut", code: "NU", gst_rate: 0.05, pst_rate: 0.0, hst_rate: 0.0 },
+  { name: "Ontario", code: "ON", gst_rate: 0.0, pst_rate: 0.0, hst_rate: 0.13 },
+  { name: "Prince Edward Island", code: "PE", gst_rate: 0.0, pst_rate: 0.0, hst_rate: 0.15 },
+  { name: "Quebec", code: "QC", gst_rate: 0.05, pst_rate: 0.09975, hst_rate: 0.0 },
+  { name: "Saskatchewan", code: "SK", gst_rate: 0.05, pst_rate: 0.06, hst_rate: 0.0 },
+  { name: "Yukon", code: "YT", gst_rate: 0.05, pst_rate: 0.0, hst_rate: 0.0 }
+]
+
+provinces.each do |province_data|
+  Province.create!(province_data)
+end
 
 puts "Reading data from CSV..."
 csv_path = Rails.root.join('db', 'cheese_details.csv')
