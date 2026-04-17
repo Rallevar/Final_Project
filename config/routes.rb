@@ -13,7 +13,11 @@ Rails.application.routes.draw do
 
   get "about", to: "about#show"
 
-  resources :orders, only: [:index, :show]
+  resources :orders, only: [:index, :show] do
+    collection do
+      post :add_item
+    end
+  end
 
   resources :products, only: [:index, :show] do
     collection do

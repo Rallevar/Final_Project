@@ -34,7 +34,7 @@
       <%= link_to "About", about_path %>
 
       <% if customer_signed_in? %>
-        | <%= link_to "Orders", orders_path %>
+        | <%= link_to "Cart", orders_path %>
         | <%= link_to "My Account", edit_customer_registration_path %>
         | <%= button_to "Logout", destroy_customer_session_path, method: :delete %>
       <% else %>

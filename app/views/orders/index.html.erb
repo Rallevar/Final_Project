@@ -1,2 +1,44 @@
-<h1>Orders#index</h1>
-<p>Find me in app/views/orders/index.html.erb</p>
+ <!--begin
+	Name: Nathan Keenan
+	Program: Business Information Technology
+	Course: WEBD-3011 (277098)
+	Created: 2026-04-17
+	Updated: 2026-04-17
+ -->
+
+<h1>Shopping Cart</h1>
+
+<% if @cart_items.any? %>
+	<div class="table-responsive">
+		<table class="table table-striped align-middle">
+			<thead>
+				<tr>
+					<th>Product</th>
+					<th>Category</th>
+					<th>Quantity</th>
+					<th>Unit Price</th>
+					<th>Item Total</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @cart_items.each do |item| %>
+					<tr>
+						<td>
+							<%= link_to item[:product].product_name.to_s.tr("-", " ").titleize, product_path(item[:product]) %>
+						</td>
+						<td><%= item[:product].category.name %></td>
+						<td><%= item[:quantity] %></td>
+						<td><%= number_to_currency(item[:product].cost) %></td>
+						<td><%= number_to_currency(item[:item_total]) %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+
+	<p class="fs-5 fw-bold">Cart Total: <%= number_to_currency(@cart_total) %></p>
+	<p><%= link_to "Continue Shopping", products_path, class: "btn btn-outline-primary" %></p>
+<% else %>
+	<p>Your shopping cart is currently empty.</p>
+	<p><%= link_to "Browse Products", products_path, class: "btn btn-primary" %></p>
+<% end %>

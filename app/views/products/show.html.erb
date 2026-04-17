@@ -23,6 +23,9 @@
 	<div class="col-12 col-lg-7">
 		<%= render "products/product_summary", product: @product %>
 		<p class="mb-2"><span class="fw-bold">Weight:</span> <%= @product.weight %></p>
+		<p>
+			<%= button_to "Add to Cart", add_item_orders_path(product_id: @product.id), method: :post, class: "btn btn-primary" %>
+		</p>
 
 		<hr>
 		<h3>Description</h3>
