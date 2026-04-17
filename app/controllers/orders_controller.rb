@@ -42,4 +42,31 @@ class OrdersController < ApplicationController
 
     redirect_to orders_path, notice: "#{product.product_name.to_s.tr('-', ' ').titleize} was added to your cart."
   end
+
+  def update_item
+    product = Product.find(params[:product_id])
+    quantity = params[:quantity].to_i
+
+    if quantity < 1
+      redirect_to orders_path, alert: "Quantity must be at least 1. Use Remove to delete an item from the cart."
+      return
+    end
+
+    if quantity > product.stock_quantity.to_i
+      redirect_to orders_path, alert: "Only #{product.stock_quantity} of this product are currently in stock."
+      return
+    end
+
+    session[:cart] ||= {}
+    session[:cart][product.id.to_s] = quantity
+
+    redirect_to orders_path, notice: "Cart quantity was updated."
+  end
+
+  def remove_item
+    session[:cart] ||= {}
+    session[:cart].delete(params[:product_id].to_s)
+
+    redirect_to orders_path, notice: "Item was removed from your cart."
+  end
 end

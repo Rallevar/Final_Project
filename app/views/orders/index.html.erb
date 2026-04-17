@@ -18,6 +18,7 @@
 					<th>Quantity</th>
 					<th>Unit Price</th>
 					<th>Item Total</th>
+					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -27,9 +28,18 @@
 							<%= link_to item[:product].product_name.to_s.tr("-", " ").titleize, product_path(item[:product]) %>
 						</td>
 						<td><%= item[:product].category.name %></td>
-						<td><%= item[:quantity] %></td>
+						<td>
+							<%= form_with url: update_item_orders_path, method: :patch, local: true, class: "d-flex gap-2 align-items-center" do %>
+								<%= hidden_field_tag :product_id, item[:product].id %>
+								<%= number_field_tag :quantity, item[:quantity], min: 1, class: "form-control", style: "width: 90px;" %>
+								<%= submit_tag "Update", class: "btn btn-outline-secondary btn-sm" %>
+							<% end %>
+						</td>
 						<td><%= number_to_currency(item[:product].cost) %></td>
 						<td><%= number_to_currency(item[:item_total]) %></td>
+						<td>
+							<%= button_to "Remove", remove_item_orders_path(product_id: item[:product].id), method: :delete, class: "btn btn-outline-danger btn-sm" %>
+						</td>
 					</tr>
 				<% end %>
 			</tbody>

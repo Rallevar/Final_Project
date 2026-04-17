@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :show] do
     collection do
       post :add_item
+      patch :update_item
+      delete :remove_item
     end
   end
 

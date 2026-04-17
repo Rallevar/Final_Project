@@ -7,6 +7,7 @@
 =end
 
 require 'csv'
+require 'faker'
 
 puts "Seeding database..."
 puts "Clearing existing data..."
@@ -81,8 +82,8 @@ CSV.foreach(csv_path, headers: true) do |row|
 
   # Create the product if it doesn't already exist
   Product.find_or_create_by!(product_name: product_name) do |p|
-    p.cost = 0
-    p.stock_quantity = 0
+    p.cost = Faker::Commerce.price(range: 1.0..50.0)
+    p.stock_quantity = Faker::Number.between(from: 0, to: 40)
     p.weight = 0
     p.origin_country = origin_country
     p.description = description
