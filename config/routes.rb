@@ -10,9 +10,18 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :customers
   ActiveAdmin.routes(self)
+
   get "about", to: "about#show"
+
   resources :orders, only: [:index, :show]
-  resources :products, only: [:index, :show]
+
+  resources :products, only: [:index, :show] do
+    collection do
+      get :recent
+      get :newest
+    end
+  end
+
   resources :categories, only: [:index, :show]
 
   get "main/index"

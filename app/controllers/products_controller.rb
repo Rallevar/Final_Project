@@ -16,4 +16,20 @@ class ProductsController < ApplicationController
   def show
     @product = Product.includes(:category, image_attachment: :blob).find(params[:id])
   end
+
+  def recent
+    @products = Product.where("updated_at >= ?", 3.days.ago) && Product.where("created_at != updated_at")
+                              .order(updated_at: :desc)
+                              .limit(30)
+
+    render :index
+  end
+
+  def newest
+    @products = Product.where("created_at >= ?", 3.days.ago)
+                          .order(created_at: :desc)
+                          .limit(30)
+
+    render :index
+  end
 end
