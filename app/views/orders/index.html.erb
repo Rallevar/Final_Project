@@ -3,7 +3,7 @@
 	Program: Business Information Technology
 	Course: WEBD-3011 (277098)
 	Created: 2026-04-17
-	Updated: 2026-04-17
+	Updated: 2026-04-19
  -->
 
 <h1>Shopping Cart</h1>
@@ -47,7 +47,10 @@
 	</div>
 
 	<p class="fs-5 fw-bold">Cart Total: <%= number_to_currency(@cart_total) %></p>
-	<p><%= link_to "Continue Shopping", products_path, class: "btn btn-outline-primary" %></p>
+	<p>
+		<%= link_to "Continue Shopping", products_path, class: "btn btn-outline-primary" %>
+		<%= link_to "Checkout", checkout_orders_path, class: "btn btn-primary" %>
+	</p>
 <% else %>
 	<p>Your shopping cart is currently empty.</p>
 	<p><%= link_to "Browse Products", products_path, class: "btn btn-primary" %></p>

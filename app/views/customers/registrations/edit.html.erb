@@ -3,7 +3,7 @@
   Program: Business Information Technology
   Course: WEBD-3011 (277098)
   Created: 2026-04-10
-  Updated: 2026-04-13
+  Updated: 2026-04-19
  -->
 
 <h1>Edit Customer Account</h1>
@@ -29,6 +29,13 @@
   <div>
     <%= f.label :address %><br>
     <%= f.text_field :address %>
+  </div>
+
+  <div>
+    <%= f.label :province_code, "Province Code" %><br>
+    <%= f.select :province_code,
+        options_for_select(Province.order(:code).map { |province| ["#{province.code} - #{province.name}", province.code] }, resource.province_code),
+        { include_blank: "Select a province code" } %>
   </div>
 
   <div>

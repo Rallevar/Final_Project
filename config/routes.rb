@@ -3,12 +3,12 @@
   Program: Business Information Technology
   Course: WEBD-3011 (277098)
   Created: 2026-04-10
-  Updated: 2026-04-13
+  Updated: 2026-04-19
 =end
 
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
-  devise_for :customers
+  devise_for :customers, controllers: { sessions: "customers/sessions" }
   ActiveAdmin.routes(self)
 
   get "about", to: "about#show"
@@ -18,6 +18,8 @@ Rails.application.routes.draw do
       post :add_item
       patch :update_item
       delete :remove_item
+      get :checkout
+      post :place_order
     end
   end
 

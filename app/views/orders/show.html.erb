@@ -1,2 +1,44 @@
-<h1>Orders#show</h1>
-<p>Find me in app/views/orders/show.html.erb</p>
+ <!--begin
+	Name: Nathan Keenan
+	Program: Business Information Technology
+	Course: WEBD-3011 (277098)
+	Created: 2026-04-17
+	Updated: 2026-04-19
+ -->
+
+<h1>Order #<%= @order.id %></h1>
+
+<p><span class="fw-bold">Status:</span> <%= @order.status.to_s.titleize %></p>
+<p><span class="fw-bold">Shipping Address:</span> <%= @order.shipping_address %></p>
+<p><span class="fw-bold">Province:</span> <%= @order.province_name %></p>
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Product</th>
+				<th>Quantity</th>
+				<th>Unit Price</th>
+				<th>Item Total</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @order.order_items.each do |item| %>
+				<tr>
+					<td><%= item.product.product_name.to_s.tr("-", " ").titleize %></td>
+					<td><%= item.quantity %></td>
+					<td><%= number_to_currency(item.unit_price) %></td>
+					<td><%= number_to_currency(item.total_price) %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+
+<p><span class="fw-bold">Subtotal:</span> <%= number_to_currency(@order.subtotal) %></p>
+<p><span class="fw-bold">GST:</span> <%= number_to_currency(@order.gst_amount) %></p>
+<p><span class="fw-bold">PST:</span> <%= number_to_currency(@order.pst_amount) %></p>
+<p><span class="fw-bold">HST:</span> <%= number_to_currency(@order.hst_amount) %></p>
+<p class="fs-5 fw-bold">Grand Total: <%= number_to_currency(@order.total_cost) %></p>
+
+<p><%= link_to "Back to Cart", orders_path, class: "btn btn-outline-primary" %></p>
