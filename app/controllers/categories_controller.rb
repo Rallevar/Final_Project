@@ -17,10 +17,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
-    @products = @category.products.includes(:category, image_attachment: :blob)
-                         .order(product_name: :asc)
-                         .page(params[:page])
-                         .per(15)
+    category = Category.find(params[:id])
+    redirect_to products_path(category_id: category.id)
   end
 end

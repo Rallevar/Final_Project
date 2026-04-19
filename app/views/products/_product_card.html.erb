@@ -26,8 +26,6 @@
         <%= link_to "View Product", product_path(product), class: "btn btn-outline-primary btn-sm" %>
         <% if customer_signed_in? %>
           <%= button_to "Add to Cart", add_item_orders_path(product_id: product.id), method: :post, class: "btn btn-primary btn-sm mt-2" %>
-        <% else %>
-          <%= link_to "Login to Purchase", new_customer_session_path, class: "btn btn-secondary btn-sm mt-2" %>
         <% end %>
       </div>
     </div>
