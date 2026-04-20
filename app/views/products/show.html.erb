@@ -23,14 +23,14 @@
 	<div class="col-12 col-lg-7">
 		<%= render "products/product_summary", product: @product %>
 		<p class="mb-2"><span class="fw-bold">Weight:</span> <%= @product.weight %></p>
-		<p>
+		<div class="mb-3">
 			<% if customer_signed_in? %>
 				<%= button_to "Add to Cart", add_item_orders_path(product_id: @product.id), method: :post, class: "btn btn-primary" %>
 			<% end %>
-		</p>
+		</div>
 
 		<hr>
-		<h3>Description</h3>
+		<h2 class="h4">Description</h2>
 		<p><%= @product.description %></p>
 	</div>
 </div>
