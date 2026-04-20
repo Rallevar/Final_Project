@@ -3,7 +3,7 @@
   Program: Business Information Technology
   Course: WEBD-3011 (277098)
   Created: 2026-04-10
-  Updated: 2026-04-13
+  Updated: 2026-04-20
 =end
 
 require 'csv'
@@ -42,6 +42,7 @@ end
 
 puts "Reading data from CSV..."
 csv_path = Rails.root.join('db', 'cheese_details.csv')
+cheese_icon_path = Rails.root.join('app', 'assets', 'images', 'cheese_icon.png')
 
 puts "Creating categories and products..."
 CSV.foreach(csv_path, headers: true) do |row|
@@ -87,9 +88,8 @@ CSV.foreach(csv_path, headers: true) do |row|
     texture = "smooth"
   end
 
-  # Set origin_country to nil if not listed
   origin_country = row['country']
-  if origin_country == nil || origin_country == "NA" || origin_country == ""
+  if origin_country == ""
     origin_country = nil
   end
 
@@ -103,7 +103,7 @@ CSV.foreach(csv_path, headers: true) do |row|
                 display_name + " is most known to be a " + texture + " cheese."
 
   # Create the product if it doesn't already exist
-  Product.find_or_create_by!(product_name: product_name) do |p|
+  product = Product.find_or_create_by!(product_name: product_name) do |p|
     p.cost = Faker::Commerce.price(range: 1.0..50.0)
     p.stock_quantity = Faker::Number.between(from: 0, to: 40)
     p.weight = 0
@@ -111,14 +111,22 @@ CSV.foreach(csv_path, headers: true) do |row|
     p.description = description
     p.category = category
   end
+
+  if File.exist?(cheese_icon_path) && !product.image.attached?
+    File.open(cheese_icon_path, 'rb') do |file|
+      product.image.attach(
+        io: file,
+        filename: product.product_name + '.png',
+        content_type: 'image/png'
+      )
+    end
+  end
 end
 
 puts "Seeded " + Category.count.to_s + " categories and " + Product.count.to_s + " products."
 
 puts "Creating admin user..."
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
-
-
 
 # Create a default About page record if one does not exist yet.
 about_page = AboutPage.first
