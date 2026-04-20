@@ -27,7 +27,9 @@ class OrdersController < ApplicationController
 
     session[:cart] ||= {}
     product_key = product.id.to_s
-    session[:cart][product_key] = session[:cart].fetch(product_key, 0).to_i + 1
+
+  current_quantity = session[:cart][product_key].to_i
+  session[:cart][product_key] = current_quantity + 1
 
     redirect_to orders_path, notice: "#{product.product_name.to_s.tr('-', ' ').titleize} was added to your cart."
   end
@@ -96,8 +98,13 @@ class OrdersController < ApplicationController
 
     calculate_checkout_totals(province)
 
-    out_of_stock_item = @cart_items.find do |item|
-      item[:quantity] > item[:product].stock_quantity.to_i
+    out_of_stock_item = nil
+
+    @cart_items.each do |item|
+      if item[:quantity] > item[:product].stock_quantity.to_i
+        out_of_stock_item = item
+        break
+      end
     end
 
     if out_of_stock_item
@@ -149,17 +156,25 @@ class OrdersController < ApplicationController
     product_ids = cart.keys.map(&:to_i)
     products = Product.includes(:category, image_attachment: :blob).where(id: product_ids)
 
-    @cart_items = products.map do |product|
+    @cart_items = []
+
+    products.each do |product|
       quantity = cart[product.id.to_s].to_i
 
-      {
+      cart_item = {
         product: product,
         quantity: quantity,
         item_total: product.cost * quantity
       }
+
+      @cart_items << cart_item
     end
 
-    @cart_total = @cart_items.sum { |item| item[:item_total] }
+    @cart_total = 0
+
+    @cart_items.each do |item|
+      @cart_total += item[:item_total]
+    end
   end
 
   def selected_province_for_checkout

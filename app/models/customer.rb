@@ -16,7 +16,14 @@ class Customer < ApplicationRecord
   belongs_to :province, optional: true
   has_many :orders
 
-  validates :user_name, presence: true
+  validates :user_name, presence: true, uniqueness: true, length: { maximum: 100 }
+  validates :name, length: { maximum: 100 }, allow_blank: true
+  validates :telephone,
+            length: { maximum: 25 },
+            format: { with: /\A[0-9\-\(\)\+\s]+\z/, message: "must be a valid phone number" },
+            allow_blank: true
+  validates :address, length: { maximum: 255 }, allow_blank: true
+  validates :province_id, numericality: { only_integer: true }, allow_nil: true
 
   def province_code
     province&.code

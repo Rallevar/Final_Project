@@ -36,6 +36,7 @@ class ProductsController < ApplicationController
   end
 
   def recent
+    # Recent products were created earlier, but updated within the last 3 days.
     @products = Product.includes(:category, image_attachment: :blob)
                        .where("updated_at >= ?", 3.days.ago)
                        .where("created_at < ?", 3.days.ago)
@@ -47,6 +48,7 @@ class ProductsController < ApplicationController
   end
 
   def newest
+    # Newest products were created within the last 3 days.
     @products = Product.includes(:category, image_attachment: :blob)
                        .where("created_at >= ?", 3.days.ago)
                        .order(created_at: :desc)

@@ -22,10 +22,12 @@ class ApplicationController < ActionController::Base
 
   def map_customer_province_code
     customer_params = params[:customer]
-    return if customer_params.nil?
+
+    if customer_params.nil? || customer_params[:province_code].blank?
+      return
+    end
 
     province_code = customer_params[:province_code]
-    return if province_code.blank?
 
     province = Province.find_by(code: province_code)
     return if province.nil?
