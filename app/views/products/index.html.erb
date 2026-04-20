@@ -6,45 +6,56 @@
   Updated: 2026-04-13
  -->
 
-<h1>
-  <% if action_name == "recent" %>
-    Recent Products
-  <% elsif action_name == "newest" %>
-    Newest Products
-  <% else %>
-    Products
-  <% end %>
-</h1>
+<div class="text-center mb-4">
+  <h1>
+    <% if action_name == "recent" %>
+      Recent Products
+    <% elsif action_name == "newest" %>
+      Newest Products
+    <% else %>
+      Products
+    <% end %>
+  </h1>
 
-<p>
-  <%= link_to "New Products", newest_products_path, class: "links" %>
-  <%= link_to "Recently Updated Products", recent_products_path, class: "links" %>
-</p>
+  <p>
+    <%= link_to "New Products", newest_products_path, class: "links" %>
+    <%= link_to "Recently Updated Products", recent_products_path, class: "links" %>
+  </p>
+</div>
 
-<%= form_with url: products_path, method: :get, local: true, class: "row g-3 mb-4" do %>
-  <div class="col-md-4">
-    <%= label_tag :keyword, "Search Products" %>
-    <%= text_field_tag :keyword, params[:keyword], class: "form-control" %>
+<div class="row justify-content-center mb-4">
+  <div class="col-md-6 col-lg-5">
+    <%= form_with url: products_path, method: :get, local: true, class: "d-flex flex-column gap-3 text-center" do %>
+      <div>
+        <%= label_tag :keyword, "Search Products", class: "form-label" %>
+        <%= text_field_tag :keyword, params[:keyword], class: "form-control" %>
+      </div>
+
+      <div>
+        <%= label_tag :category_id, "Filter by Category", class: "form-label" %>
+        <%= select_tag :category_id,
+              options_from_collection_for_select(@categories, :id, :name, params[:category_id]),
+              include_blank: "All Categories",
+              class: "form-select" %>
+      </div>
+
+      <div>
+        <%= submit_tag "Search", class: "links" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% if @products.any? %>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+    <%= render partial: "product_card", collection: @products, as: :product %>
   </div>
 
-  <div class="col-md-4">
-    <%= label_tag :category_id, "Filter by Category" %>
-    <%= select_tag :category_id,
-          options_from_collection_for_select(@categories, :id, :name, params[:category_id]),
-          include_blank: "All Categories",
-          class: "form-select" %>
+  <div class="custom-pagination">
+    <%= paginate @products %>
   </div>
-
-  <div class="col-md-4 d-flex align-items-end">
-    <%= submit_tag "Search", class: "links" %>
+<% else %>
+  <div class="alert alert-light text-center border mt-4" role="alert">
+    No products found that match your search.
   </div>
 <% end %>
-
-
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
-  <%= render partial: "product_card", collection: @products, as: :product %>
-</div>
-
-<div>
-  <%= paginate @products %>
-</div>

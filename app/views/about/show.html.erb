@@ -3,16 +3,23 @@
   Program: Business Information Technology
   Course: WEBD-3011 (277098)
   Created: 2026-04-10
-  Updated: 2026-04-13
+  Updated: 2026-04-20
  -->
 
-<h1><%= @about_page.title %></h1>
+<h1></h1>
 
-<div>
-  <%= simple_format(@about_page.content) %>
+<div class="about-header d-flex justify-content-center align-items-center gap-3 flex-wrap">
+  <%= image_tag "cheese_icon.png", alt: "Cheese icon", class: "home-header-icon" %>
+  <h1 class="mb-0"><%= @about_page.title %></h1>
+  <%= image_tag "cheese_icon.png", alt: "Cheese icon", class: "home-header-icon" %>
 </div>
 
-<h2>Contact Information</h2>
-<p><span class="fw-bold">Telephone:</span> <%= @about_page.telephone %></p>
-<p><span class="fw-bold">Address:</span> <%= @about_page.address %></p>
-<p><span class="fw-bold">Email:</span> <%= mail_to @about_page.email %></p>
+<div class="text-center mb-4 mt-4">
+  <%= simple_format(@about_page.content) %>
+</div>
+<div class="text-center mb-4 mt-4">
+  <h2>Contact Information</h2>
+  <p><span class="fw-bold">Telephone:</span> <%= @about_page.telephone %></p>
+  <p><span class="fw-bold">Address:</span> <%= @about_page.address %></p>
+  <p><span class="fw-bold">Email:</span> <%= mail_to @about_page.email %></p>
+</div>

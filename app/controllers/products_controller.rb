@@ -28,7 +28,7 @@ class ProductsController < ApplicationController
     end
 
     # Pagination
-    @products = @products.page(params[:page]).per(30)
+    @products = @products.page(params[:page]).per(20)
   end
 
   def show
@@ -42,7 +42,7 @@ class ProductsController < ApplicationController
                        .where("created_at < ?", 3.days.ago)
                        .order(updated_at: :desc)
                        .page(params[:page])
-                       .per(30)
+                       .per(20)
 
     render :index
   end
@@ -53,7 +53,7 @@ class ProductsController < ApplicationController
                        .where("created_at >= ?", 3.days.ago)
                        .order(created_at: :desc)
                        .page(params[:page])
-                       .per(30)
+                       .per(20)
 
     render :index
   end

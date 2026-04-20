@@ -1,42 +1,53 @@
- <!--begin
+<!--begin
   Name: Nathan Keenan
   Program: Business Information Technology
   Course: WEBD-3011 (277098)
   Created: 2026-04-10
-  Updated: 2026-04-13
+  Updated: 2026-04-20
  -->
 
-<h1>Create Customer Account</h1>
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card shadow-sm border-0 text-center">
+      <div class="card-body p-4">
+        <h1 class="mb-4">Create Customer Account</h1>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div>
-    <%= f.label :user_name %><br>
-    <%= f.text_field :user_name, autofocus: true %>
+          <div class="mb-3">
+            <%= f.label :user_name, class: "form-label" %>
+            <%= f.text_field :user_name, autofocus: true, class: "form-control text-center" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :email, class: "form-label" %>
+            <%= f.email_field :email, autocomplete: "email", class: "form-control text-center" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :password, class: "form-label d-block" %>
+            <% if @minimum_password_length %>
+              <div class="mb-2">(<%= @minimum_password_length %> characters minimum)</div>
+            <% end %>
+            <%= f.password_field :password, autocomplete: "new-password", class: "form-control text-center" %>
+          </div>
+
+          <div class="mb-4">
+            <%= f.label :password_confirmation, class: "form-label" %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control text-center" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.submit "Sign up", class: "shaded_links" %>
+          </div>
+        <% end %>
+
+        <div>
+          <p class="text-muted mb-2">Already have an account? Click below to log in.</p>
+          <%= link_to "Log in", new_customer_session_path, class: "links" %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div>
-    <%= f.label :email %><br>
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div>
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-      (<%= @minimum_password_length %> characters minimum)
-    <% end %><br>
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div>
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div>
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

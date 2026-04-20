@@ -125,8 +125,24 @@ about_page = AboutPage.first
 
 if about_page == nil
   AboutPage.create!(
-    title: "About Us",
-    content: "Welcome to Winnipeg Cheesemongers. You can edit this content in your Active Admin dashboard.",
+    title: "About Winnipeg Cheesemongers",
+    content: "Winnipeg Cheesemongers is a locally established specialty cheese business that has proudly
+              served the Winnipeg community for the past five years. Founded by Amelia Laurent and
+              Daniel Mercer, the business was created with the goal of offering a carefully curated
+              selection of local and international artisan cheeses while maintaining a high standard
+              of quality, knowledge, and customer service. Working alongside their small team,
+              including cheesemongers Claire Bennett and Marcus Delaney, they have built Winnipeg
+              Cheesemongers into a shop known for thoughtful selection, professional guidance,
+              and a genuine appreciation for the craft behind each product. By bringing together
+              cheeses from Manitoba producers and respected international makers, Winnipeg Cheesemongers
+              aims to provide customers with a refined and memorable experience rooted in both local pride
+              and global tradition.
+
+              At Winnipeg Cheesemongers, we value strong relationships with our customers and the
+              community we serve. If you have any questions, concerns, or would like more information about
+              our products and services, we encourage you to use the contact details provided below to get in
+              touch with our team. We are always happy to assist, offer guidance, and help ensure your
+              experience with Winnipeg Cheesemongers is a positive one.",
     telephone: "204-555-1234",
     address: "123 Cheese Lane, Winnipeg, MB",
     email: "info@winnipegcheesemongers.com"

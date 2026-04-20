@@ -17,7 +17,7 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_self
- */
+*/
 
 /* Active Admin is loaded from its own stylesheet entrypoint. */
 
@@ -37,13 +37,54 @@
   width: 200px;
 }
 
+.home-header {
+  margin-top: 4rem;
+	margin-bottom: 1rem;
+	gap: 1.5rem;
+}
 
+.home-header h1 {
+	font-size: 3rem;
+}
+
+.home-header-icon {
+	width: 56px;
+	height: 56px;
+	object-fit: contain;
+}
+
+.custom-pagination {
+	margin-top: 1.5rem;
+	margin-bottom: 1.5rem;
+	text-align: center;
+}
+
+.custom-pagination .pagination {
+	justify-content: center;
+	gap: 0.5rem;
+}
+
+.custom-pagination .active a {
+	background-color: #000;
+	border-color: #000;
+	color: #fff;
+	box-shadow: none;
+}
+
+.custom-pagination .disabled a {
+	background-color: #ffffff;
+	border-color: #212529;
+	color: #6c757d;
+	opacity: 0.65;
+	cursor: default;
+}
 
 /* Custom style for button links simulates base boostrap button styles. */
 .links,
 a.links,
 button.links,
 input.links,
+.custom-pagination .pagination a,
 .shaded_links,
 a.shaded_links,
 button.shaded_links,
@@ -72,13 +113,16 @@ a.links:visited,
 button.links,
 button.links:visited,
 input.links,
-input.links:visited {
+input.links:visited,
+.custom-pagination .pagination a,
+.custom-pagination .pagination a:visited {
   -webkit-appearance: none;
 	appearance: none;
 	background-image: none;
 	background-color: #ffffff;
 	color: #212529;
-  text-shadow: #000 0 1px 0;
+	text-shadow: #000 0 1px 0;
+	box-shadow: none;
 }
 
 .links:hover,
@@ -86,13 +130,16 @@ input.links:visited {
 a.links:hover,
 a.links:focus,
 button.links:hover,
-button.links:focus
+button.links:focus,
 input.links:hover,
-input.links:focus {
+input.links:focus,
+.custom-pagination .pagination a:hover,
+.custom-pagination .pagination a:focus {
 	background-color: #000;
 	border-color: #000;
 	color: #fff;
 	text-decoration: none;
+	box-shadow: none;
 }
 
 /* Additional styling on top of base styles. Shaded links. */
@@ -129,7 +176,7 @@ input.shaded_links:focus {
 	text-decoration: none;
 }
 
-/*Id specific styles for certain buttons.  Workaround for Bootstrap and Browser based conflicts.*/
+/*ID specific styles for certain buttons.  Workaround for Bootstrap and Browser based conflicts.*/
 #cancel-account-button,
 #cancel-account-button:visited,
 #place_order_button,
