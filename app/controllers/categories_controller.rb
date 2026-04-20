@@ -10,8 +10,6 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.includes(:products)
                           .order(:name)
-                          .page(params[:page])
-                          .per(15)
   end
 
   def show

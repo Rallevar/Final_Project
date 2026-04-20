@@ -23,9 +23,9 @@
       <p class="card-text"><%= truncate(product.description.to_s, length: 250) %></p>
 
       <div class="mt-auto">
-        <%= link_to "View Product", product_path(product), class: "btn btn-outline-primary btn-sm" %>
+        <%= link_to "View Product", product_path(product), class: "links w_50px" %>
         <% if customer_signed_in? %>
-          <%= button_to "Add to Cart", add_item_orders_path(product_id: product.id), method: :post, class: "btn btn-primary btn-sm mt-2" %>
+          <%= button_to "Add to Cart", add_item_orders_path(product_id: product.id), method: :post, class: "shaded_links mt-2 w_50px" %>
         <% end %>
       </div>
     </div>

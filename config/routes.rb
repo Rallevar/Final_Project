@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   devise_for :customers, controllers: { sessions: "customers/sessions" }
   ActiveAdmin.routes(self)
 
+  resource :customer, only: [:show]
+
   get "about", to: "about#show"
 
   resources :orders, only: [:index, :show] do

@@ -17,6 +17,11 @@ class Product < ApplicationRecord
   validates :origin_country, length: { maximum: 100 }, allow_blank: true
   validates :description, presence: true
   validates :category_id, presence: true, numericality: { only_integer: true }
+  validate :image_must_be_an_image
+
+  def formatted_product_name
+    product_name.to_s.tr("-", " ").titleize
+  end
 
   def self.ransackable_attributes(auth_object = nil)
     ["id", "product_name", "cost", "stock_quantity", "weight", "origin_country", "description", "category_id", "created_at", "updated_at"]
@@ -24,5 +29,15 @@ class Product < ApplicationRecord
 
   def self.ransackable_associations(auth_object = nil)
     ["category", "image_attachment"]
+  end
+
+  private
+
+  def image_must_be_an_image
+    return unless image.attached?
+
+    if image.blob.content_type.nil? || !image.blob.content_type.start_with?("image/")
+      errors.add(:image, "must be an image file")
+    end
   end
 end

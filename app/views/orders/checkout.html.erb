@@ -54,7 +54,7 @@
   <p class="fs-5 fw-bold">Grand Total: <%= number_to_currency(@grand_total) %></p>
 
   <div class="d-flex gap-2">
-    <%= submit_tag "Place Order", class: "btn btn-primary" %>
-    <%= link_to "Back to Cart", orders_path, class: "btn btn-outline-secondary" %>
+    <%= submit_tag "Place Order", class: "shaded_links", id: "place_order_button" %>
+    <%= link_to "Back to Cart", orders_path, class: "links" %>
   </div>
 <% end %>

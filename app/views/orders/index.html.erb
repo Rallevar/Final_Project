@@ -48,10 +48,10 @@
 
 	<p class="fs-5 fw-bold">Cart Total: <%= number_to_currency(@cart_total) %></p>
 	<p>
-		<%= link_to "Continue Shopping", products_path, class: "btn btn-outline-primary" %>
-		<%= link_to "Checkout", checkout_orders_path, class: "btn btn-primary" %>
+		<%= link_to "Continue Shopping", products_path, class: "shaded_links" %>
+		<%= link_to "Checkout", checkout_orders_path, class: "links" %>
 	</p>
 <% else %>
 	<p>Your shopping cart is currently empty.</p>
-	<p><%= link_to "Browse Products", products_path, class: "btn btn-primary" %></p>
+	<p><%= link_to "Browse Products", products_path, class: "links" %></p>
 <% end %>

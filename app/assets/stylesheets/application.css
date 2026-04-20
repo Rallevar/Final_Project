@@ -1,4 +1,10 @@
 /*
+  Name: Nathan Keenan
+  Program: Business Information Technology
+  Course: WEBD-3011 (277098)
+  Created: 2026-04-10
+  Updated: 2026-04-20
+
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
@@ -10,6 +16,165 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
  *= require_self
  */
+
+/* Active Admin is loaded from its own stylesheet entrypoint. */
+
+
+.navbar .nav-link {
+	text-decoration: none;
+	font-weight: 400;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+	text-decoration: underline;
+	font-weight: 700;
+}
+
+.w_50px {
+  width: 200px;
+}
+
+
+
+/* Custom style for button links simulates base boostrap button styles. */
+.links,
+a.links,
+button.links,
+input.links,
+.shaded_links,
+a.shaded_links,
+button.shaded_links,
+input.shaded_links {
+	display: inline-block !important;
+	padding: 0.55rem 1.2rem !important;
+	border-radius: 0.5rem !important;
+	border: 1px solid #212529;
+	font-family: inherit !important;
+	font-size: 1rem !important;
+	font-weight: 400;
+	line-height: 1.5;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+	background-image: none !important;
+}
+
+/* Additional styling on top of base styles. Unshaded links. */
+.links,
+.links:visited,
+a.links,
+a.links:visited,
+button.links,
+button.links:visited,
+input.links,
+input.links:visited {
+  -webkit-appearance: none;
+	appearance: none;
+	background-image: none;
+	background-color: #ffffff;
+	color: #212529;
+  text-shadow: #000 0 1px 0;
+}
+
+.links:hover,
+.links:focus,
+a.links:hover,
+a.links:focus,
+button.links:hover,
+button.links:focus
+input.links:hover,
+input.links:focus {
+	background-color: #000;
+	border-color: #000;
+	color: #fff;
+	text-decoration: none;
+}
+
+/* Additional styling on top of base styles. Shaded links. */
+.shaded_links,
+.shaded_links:visited,
+a.shaded_links,
+a.shaded_links:visited,
+button.shaded_links,
+button.shaded_links:visited,
+input.shaded_links,
+input.shaded_links:visited {
+	background-color: #000;
+	border-color: #000;
+	color: #ffffff;
+	box-shadow: none;
+}
+
+
+.shaded_links:hover,
+.shaded_links:focus,
+a.shaded_links:hover,
+a.shaded_links:focus,
+button.shaded_links:hover,
+button.shaded_links:focus,
+input.shaded_links:hover,
+input.shaded_links:focus {
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: #ffffff !important;
+	background-image: none !important;
+	border-color: #000;
+	color: #000;
+	box-shadow: none;
+	text-decoration: none;
+}
+
+/*Id specific styles for certain buttons.  Workaround for Bootstrap and Browser based conflicts.*/
+#cancel-account-button,
+#cancel-account-button:visited,
+#place_order_button,
+#place_order_button:visited {
+  -webkit-appearance: none;
+	appearance: none;
+	background-image: none;
+  background-color: #dc3545;
+  color: #fff;
+}
+
+#cancel-account-button:hover,
+#cancel-account-button:focus,
+#place_order_button:hover,
+#place_order_button:focus {
+  -webkit-appearance: none;
+	appearance: none;
+	background-image: none;
+  background-color: #fff;
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+#login-button,
+#logout-button,
+#login-button:visited,
+#logout-button:visited {
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: none;
+  background-color: rgb(255, 230, 0);
+  color: #000;
+  border-color: #000;
+  text-decoration: none;
+}
+
+#login-button:hover,
+#logout-button:hover,
+#login-button:focus,
+#logout-button:focus {
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: none;
+  background-color: #000;
+  color: rgb(255, 230, 0);
+  border-color: #000;
+  text-decoration: none;
+}

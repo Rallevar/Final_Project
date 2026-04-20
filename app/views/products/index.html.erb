@@ -17,8 +17,8 @@
 </h1>
 
 <p>
-  <%= link_to "View New Products", newest_products_path, class: "btn btn-outline-primary mb-3" %>
-  <%= link_to "View Recent Products", recent_products_path, class: "btn btn-outline-primary mb-3" %>
+  <%= link_to "New Products", newest_products_path, class: "links" %>
+  <%= link_to "Recently Updated Products", recent_products_path, class: "links" %>
 </p>
 
 <%= form_with url: products_path, method: :get, local: true, class: "row g-3 mb-4" do %>
@@ -36,7 +36,7 @@
   </div>
 
   <div class="col-md-4 d-flex align-items-end">
-    <%= submit_tag "Search", class: "btn btn-primary w-100" %>
+    <%= submit_tag "Search", class: "links" %>
   </div>
 <% end %>
 
