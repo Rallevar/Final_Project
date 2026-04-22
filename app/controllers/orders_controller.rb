@@ -3,7 +3,7 @@
   Program: Business Information Technology
   Course: WEBD-3011 (277098)
   Created: 2026-04-10
-  Updated: 2026-04-19
+  Updated: 2026-04-22
 =end
 
 class OrdersController < ApplicationController
@@ -28,8 +28,8 @@ class OrdersController < ApplicationController
     session[:cart] ||= {}
     product_key = product.id.to_s
 
-  current_quantity = session[:cart][product_key].to_i
-  session[:cart][product_key] = current_quantity + 1
+    current_quantity = session[:cart][product_key].to_i
+    session[:cart][product_key] = current_quantity + 1
 
     redirect_to orders_path, notice: "#{product.product_name.to_s.tr('-', ' ').titleize} was added to your cart."
   end

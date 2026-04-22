@@ -14,9 +14,9 @@ ActiveAdmin.register Customer do
   remove_filter :encrypted_password
   remove_filter :reset_password_token
 
-  scope :all
-  # Default the admin view to customers who have submitted at least one order.
-  scope("With Orders", default: true) do |customers|
+  scope :all, default: true
+  # This scope keeps a quick filter for customers who have submitted at least one order.
+  scope("With Orders") do |customers|
     customer_ids = Order.all.pluck(:customer_id)
     customers.where(id: customer_ids)
   end

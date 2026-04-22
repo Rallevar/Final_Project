@@ -1,15 +1,15 @@
- <!--begin
+<!--begin
 	Name: Nathan Keenan
 	Program: Business Information Technology
 	Course: WEBD-3011 (277098)
 	Created: 2026-04-10
-	Updated: 2026-04-20
+	Updated: 2026-04-22
  -->
 
 <h1 class="text-center">Browse By Category</h1>
 <p class="text-center">Select a category to view all products in it.</p>
 
-<div class="list-group w-50 align-center mx-auto">
+<div class="list-group w-50 mx-auto">
 	<% @categories.each do |category| %>
 		<%= link_to category_path(category), class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center text-decoration-none text-dark" do %>
 			<span><%= category.name %></span>
