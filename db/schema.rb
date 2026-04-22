@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_04_17_121000) do
+ActiveRecord::Schema[7.2].define(version: 2026_04_22_120000) do
   create_table "about_pages", force: :cascade do |t|
     t.string "title", null: false
     t.text "content", null: false
@@ -82,7 +82,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_04_17_121000) do
   end
 
   create_table "customers", force: :cascade do |t|
-    t.string "user_name"
     t.string "email", default: ""
     t.string "name"
     t.string "telephone"

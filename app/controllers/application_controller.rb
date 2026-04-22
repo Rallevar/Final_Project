@@ -3,7 +3,7 @@
   Program: Business Information Technology
   Course: WEBD-3011 (277098)
   Created: 2026-04-10
-  Updated: 2026-04-19
+  Updated: 2026-04-22
 =end
 
 class ApplicationController < ActionController::Base
@@ -16,8 +16,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:user_name, :name, :telephone])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:user_name, :name, :telephone, :address, :province_id])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :telephone])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :telephone, :address, :province_id])
   end
 
   def map_customer_province_code

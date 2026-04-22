@@ -3,7 +3,7 @@
   Program: Business Information Technology
   Course: WEBD-3011 (277098)
   Created: 2026-04-10
-  Updated: 2026-04-20
+  Updated: 2026-04-22
  -->
 
 <div class="row justify-content-center">
@@ -12,17 +12,24 @@
       <div class="card-body p-4">
         <h1 class="mb-4">Create Customer Account</h1>
 
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%= render "devise/shared/error_messages", resource: resource %>
-
-          <div class="mb-3">
-            <%= f.label :user_name, class: "form-label" %>
-            <%= f.text_field :user_name, autofocus: true, class: "form-control text-center" %>
-          </div>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { novalidate: true, autocomplete: "off" }) do |f| %>
+          <% if resource.errors.any? %>
+            <div class="mb-3 text-danger text-start" role="alert" aria-live="polite">
+              <p class="fw-bold mb-1">Your account could not be created:</p>
+              <ul class="mb-0 ps-3">
+                <% resource.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
 
           <div class="mb-3">
             <%= f.label :email, class: "form-label" %>
-            <%= f.email_field :email, autocomplete: "email", class: "form-control text-center" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "off", class: "form-control text-center" %>
+            <% resource.errors.full_messages_for(:email).each do |message| %>
+              <div class="text-danger small text-start mt-1"><%= message %></div>
+            <% end %>
           </div>
 
           <div class="mb-3">
@@ -30,12 +37,18 @@
             <% if @minimum_password_length %>
               <div class="mb-2">(<%= @minimum_password_length %> characters minimum)</div>
             <% end %>
-            <%= f.password_field :password, autocomplete: "new-password", class: "form-control text-center" %>
+            <%= f.password_field :password, autocomplete: "off", class: "form-control text-center" %>
+            <% resource.errors.full_messages_for(:password).each do |message| %>
+              <div class="text-danger small text-start mt-1"><%= message %></div>
+            <% end %>
           </div>
 
           <div class="mb-4">
             <%= f.label :password_confirmation, class: "form-label" %>
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control text-center" %>
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control text-center" %>
+            <% resource.errors.full_messages_for(:password_confirmation).each do |message| %>
+              <div class="text-danger small text-start mt-1"><%= message %></div>
+            <% end %>
           </div>
 
           <div class="mb-3">

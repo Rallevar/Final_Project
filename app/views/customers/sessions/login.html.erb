@@ -3,7 +3,7 @@
   Program: Business Information Technology
   Course: WEBD-3011 (277098)
   Created: 2026-04-17
-  Updated: 2026-04-20
+  Updated: 2026-04-22
  -->
 
 <div class="row justify-content-center">
@@ -12,7 +12,7 @@
       <div class="card-body p-4">
         <h1 class="mb-4">Customer Login</h1>
 
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { novalidate: true }) do |f| %>
           <div class="mb-3">
             <%= f.label :email, class: "form-label" %>
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control text-center" %>

@@ -60,12 +60,12 @@ CSV.foreach(csv_path, headers: true) do |row|
   url_parts = row['url'].split('/')
   product_name = url_parts[url_parts.length - 1]
 
-  # Skip if we couldn't get a name
+  # Skip if process couldn't get a name
   if product_name == nil || product_name == ""
     next
   end
 
-  # Build a readable name and sentence-style description.
+  # Build a readable name and construct a description from varous fields in the csv.
   display_name = product_name.tr('-', ' ').titleize
 
   cheese_type = row['type']
